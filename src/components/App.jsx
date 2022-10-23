@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {SearchBar} from "components/SearchBar/SearchBar"
+import { ImageGallery } from './ImageGallery/ImageGallery';
+
 
 // axios.defaults.baseURL = "https://pixabay.com/api/?key=29365633-60606ea12614ba8c3cfb381aa";
 
@@ -16,6 +18,7 @@ export class App extends Component {
     page: 1,
     images: [],
     loading: false,
+    error: null,
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -24,9 +27,8 @@ export class App extends Component {
     const { name, page } = this.state;
     
     if (prevProps.name !== this.props.name) {
-      // console.log(prevProps.name)
-      // console.log(this.props.name)
-      // this.handleChangeState();
+      
+      this.handleChangeState();
       
       
     }
@@ -60,6 +62,8 @@ export class App extends Component {
     return (
       <div>
         <SearchBar onSubmit={this.handleChangeState}/>
+        <ImageGallery images={this.state.images}/> 
+       
       </div>
     )
   }
