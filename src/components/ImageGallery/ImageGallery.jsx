@@ -1,20 +1,20 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem'
-import React from 'react'
 
-export const ImageGallery = ({images}) => {
+export const ImageGallery = ({images, onClick}) => {
    return (
    <div>
      {images.length > 0 && 
         images.map(({id, webformatURL, largeImageURL, tags }) => {
             return (
-                <div>
+                
                        <ImageGalleryItem 
                        key={id}
                        image={webformatURL}
                        largeImg={largeImageURL}
                        name={tags}
-                       />
-                   </div>
+                       onClick={onClick}
+                       > </ImageGalleryItem>
+                   
                  )
         })
        

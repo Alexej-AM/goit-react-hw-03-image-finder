@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const ImageGalleryItem = ({image, largeImg, name}) => {
+export const ImageGalleryItem = ({image, largeImg, name, onClick}) => {
   return (
-    <li>
+    <li onClick={() => onClick(largeImg)}>
         <img src={image} alt={name} />
     </li>
   )

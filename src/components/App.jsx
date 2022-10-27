@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {SearchBar} from "components/SearchBar/SearchBar"
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { Modal } from './Modal/Modal';
 
 
 // axios.defaults.baseURL = "https://pixabay.com/api/?key=29365633-60606ea12614ba8c3cfb381aa";
@@ -19,6 +20,8 @@ export class App extends Component {
     images: [],
     loading: false,
     error: null,
+    modalShow: false,
+    modalContent: '',
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,12 +61,34 @@ export class App extends Component {
     
   };
 
+  closeModal = () => {
+    this.setState({
+      modalShow: false,
+      modalContent: '',
+    });
+  }
+
+  openModal = largeImg => {
+this.setState({
+  modalShow: true,
+  modalContent: largeImg,
+})
+  }
+
+
   render() {
+    const {modalShow, modalContent, images} = this.state;
+    
+
     return (
       <div>
         <SearchBar onSubmit={this.handleChangeState}/>
-        <ImageGallery images={this.state.images}/> 
-       
+        <ImageGallery images={images} onClick={this.openModal}> </ImageGallery>
+        {modalShow && (
+        <Modal onClose={this.closeModal}>
+          <img src={modalContent} alt="" />
+        </Modal>
+      )}
       </div>
     )
   }
