@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {SearchBarHeader, SearchForm, ButtonForm, ButtonLabel, FormInput} from './SearchBarStyled';
+// import {Search} from '@styled-icons/bootstrap';
+import {Searchengin} from '@styled-icons/fa-brands';
+
 
 
 export class SearchBar extends Component {
@@ -24,7 +27,8 @@ handleSubmit = e => {
       
         <SearchBarHeader >
   <SearchForm onSubmit={this.handleSubmit} >
-    <ButtonForm type="submit" >
+    <ButtonForm   type="submit" >
+    <Searchengin/>
       <ButtonLabel >Search</ButtonLabel>
     </ButtonForm>
 
