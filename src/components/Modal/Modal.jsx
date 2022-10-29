@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import { Overlay, StyledModal } from './ModalStyled';
+import PropTypes from 'prop-types';
+
 
 
 const modalRoot = document.querySelector('#modal-root');
@@ -37,3 +39,6 @@ handleClose = ({ target, currentTarget, code }) => {
 }
 
 
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};

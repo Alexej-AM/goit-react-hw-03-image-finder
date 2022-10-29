@@ -1,8 +1,11 @@
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem'
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import {GalleryImage} from './ImageGalleryStyled';
+import PropTypes from 'prop-types';
+
 
 export const ImageGallery = ({images, onClick}) => {
    return (
-   <div>
+   <GalleryImage>
      {images.length > 0 && 
         images.map(({id, webformatURL, largeImageURL, tags }) => {
             return (
@@ -19,7 +22,19 @@ export const ImageGallery = ({images, onClick}) => {
         })
        
     }
-   </div>
+   </GalleryImage>
    )
 }
 
+ImageGallery.propTypes = {
+   onClick: PropTypes.func.isRequired,
+   images: PropTypes.arrayOf(
+      PropTypes.shape({
+         id: PropTypes.number.isRequired,
+          webformatURL: PropTypes.string.isRequired,
+          largeImageURL: PropTypes.string.isRequired,
+          tags: PropTypes.string.isRequired,
+      }
+      
+   ))
+ };

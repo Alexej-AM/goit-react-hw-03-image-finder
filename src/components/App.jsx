@@ -3,7 +3,9 @@ import axios from 'axios';
 import {SearchBar} from "components/SearchBar/SearchBar"
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Modal } from './Modal/Modal';
-
+import { Button } from './Button/Button';
+import { Loader } from './Loader/Loader';
+import { AppStyled } from './AppStyled';
 
 // axios.defaults.baseURL = "https://pixabay.com/api/?key=29365633-60606ea12614ba8c3cfb381aa";
 
@@ -75,21 +77,38 @@ this.setState({
 })
   }
 
+  handleLoadMoreBtn = () => {
+    const { name, page } = this.state;
+    this.setState({ loading: true });
+    this.fetchImages(name, page).then(response => {
+      this.setState(prevState => ({
+        images: [...prevState.images, ...response],
+        page: prevState.page + 1,
+        loading: false,
+      }));
+    });
+  };
+  
+
 
   render() {
-    const {modalShow, modalContent, images} = this.state;
+    const {modalShow, modalContent, images, loading} = this.state;
     
 
     return (
-      <div>
+      <AppStyled>
         <SearchBar onSubmit={this.handleChangeState}/>
         <ImageGallery images={images} onClick={this.openModal}> </ImageGallery>
+        {loading && 
+        <Loader></Loader>}
+        {images.length > 0 && 
+        <Button onClick={this.handleLoadMoreBtn}></Button>}
         {modalShow && (
         <Modal onClose={this.closeModal}>
           <img src={modalContent} alt="" />
         </Modal>
       )}
-      </div>
+      </AppStyled>
     )
   }
 }
